@@ -8,19 +8,53 @@ namespace delegate_example
 {
     public class Program
     {
-        static void Main(string[] args)
+        const string PRESS_ENTER_TO_SEE_MENU = "Press enter to see menu";
+
+        public static void Main(string[] args)
         {
             var mathCalculations = new MathCalculations();
+            ConsoleKeyInfo keyPress;
 
-            Console.WriteLine("Multi delegate");
-            mathCalculations.Calculations(10, 5);
+            DisplayMenu();
 
-            Console.WriteLine("");
-            Console.WriteLine("Single delegate");
-            mathCalculations.MultiplyCalculation(10, 3);
-            Console.ReadLine();
+            do
+            {
+                keyPress = Console.ReadKey(false); // show the key as you read it
+
+                Console.Clear();
+                switch (keyPress.KeyChar.ToString())
+                {
+                    case "1":
+                        mathCalculations.MultiplyCalculation(10, 3);
+                        break;
+                    case "2":
+                        mathCalculations.Calculations(10, 3);
+                        break;
+                    case "3":
+                        mathCalculations.CalculationsMinusMultiply(10, 3);
+                        break;
+                }
+
+                Console.WriteLine(PRESS_ENTER_TO_SEE_MENU);
+                if (keyPress.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    DisplayMenu();
+                }
 
 
+            } while (keyPress.Key != ConsoleKey.Escape);
+
+        }
+
+        public static void DisplayMenu()
+        {
+            Console.WriteLine("Delegate test menu:");
+            Console.WriteLine();
+            Console.WriteLine("1. Only multiply");
+            Console.WriteLine("2. Perform all calculations");
+            Console.WriteLine("3. Perform all calculations minus multiply");
+            Console.WriteLine("Press escape to exit");
         }
     }
 }

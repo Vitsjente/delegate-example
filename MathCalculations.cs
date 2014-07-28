@@ -16,12 +16,16 @@ namespace delegate_example
 
         public Calculation MultiplyCalculation;
 
+        public Calculation CalculationsMinusMultiply;
+
         //Create multiple 
         public MathCalculations()
         {
             Calculations = Add;
             Calculations += Multiply;
             Calculations += Divide;
+
+            CalculationsMinusMultiply = Calculations - Multiply;
 
             MultiplyCalculation = Multiply;
         }
@@ -34,7 +38,7 @@ namespace delegate_example
         public void Add(int i, int j)
         {
             Console.WriteLine(String.Format("Add result {0}", i + j));
-        }
+         }
 
         /// <summary>
         /// Multiply two integers and write them to the screen
